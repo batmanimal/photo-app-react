@@ -8,14 +8,26 @@ Design mock (taken from the completed version in Angular)
 
 Inspired by ["Thinking in React"](http://facebook.github.io/react/docs/thinking-in-react.html), here is the organization of each component in the mock:
 
-- `AppContainer` (contains entire app)
-    * `Photo` (displays the photo)
+- `AppHeader` (displays static header)
+- `AppContainer` (contains entire app under header)
+    * `SelectedPhoto` (displays the selected photo)
     * `PhotoInfo` (displays caption and count for the selected photo)
     * `AlbumInfo` (displays photo list)
         - `PhotoListHeader` (displays a heading for the album)
         - `PhotoTitle` (displays a clickable photo title)
     - `RatingDropDown` (receives user input to rate the photo in the display) 
-    - `Rating` (displays the star value under the dropdown) <- not shown in the mock
+    - `RatingDisplay` (displays the star value under the dropdown) <- not shown in the mock
+
+
+### Process
+
+1. Build the static version (UI components without interactivity)
+
+  -  `AppHeader` (just HTML with Bootstrap)
+  -  `AlbumInfo` (table that holds list)
+     - `PhotoListHeader` (displays a heading for the album)      
+     - `PhotoTitle` (displays a clickable photo title)
+  -  `RatingDropDown` (menu with 4 options)
 
 ### Related Projects
 

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Photo App with Angular</title>
+    <script src="build/react.js"></script>
+    <script src="build/JSXTransformer.js"></script>
+    <script src="build/react-bootstrap.js"></script>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+  <div class="container">
+    <div class="jumbotron app-header">
+    <h1>My Super Awesome Photos</h1>
+    </div> 
+
+    <div id="app-container">
+    </div> <!-- where we will mount the app -->
+    <div id="photo-container"></div> 
+    <div id="rating-dropdown"></div> 
+
+    <script type="text/jsx">
+      /** @jsx React.DOM */
+
+      var Table = ReactBootstrap.Table;
+      var Glyphicon = ReactBootstrap.Table;
+      var Button = ReactBootstrap.Button;
+      var ButtonToolbar = ReactBootstrap.ButtonToolbar;
+      var SplitButton = ReactBootstrap.SplitButton;
+      var MenuItem = ReactBootstrap.MenuItem;
+
+
+      
+      var PhotoTitle = React.createClass({
+        render: function() {
+          var title = this.props.photo.title;
+          return (
+            <tr>
+              <td>{title}</td>
+            </tr>
+          );
+        }
+      });
+
+      var AlbumInfo = React.createClass({
+        render: function() {
+          var rows = [];
+          this.props.photos.forEach(function(photo) {
+            rows.push(<PhotoTitle photo={photo} key={photo.title} />);
+          });
+
+          // test function for click behavior
+          // TODO bind click to selected photo
+          // var selectedTitle;
+          var alertClicked = function() {
+            // selectedTitle = photo.title;
+            alert('You clicked me');
+          };
+
+          return (
+            <div className="album-info">
+              <Table responsive bordered hover>
+                <thead>
+                  <tr><th>Photos in this Album</th></tr>
+                </thead>
+                <tbody><a onClick={alertClicked}>{rows}</a></tbody>
+              </Table></div>
+            );
+        }
+      });
+
+      var SelectedPhoto = React.createClass({
+        render: function() {
+          return (
+            <div className="selected-photo">
+              <img src={this.props.photos[0].imageUrl} />
+                <div className="caption">{this.props.photos[0].caption}
+                  <div className="count">{this.props.photos[0].orderCount} of {this.props.photos.length}</div>
+                </div>
+            </div>
+            );
+        }
+      });
+
+      var RatingDropdown = React.createClass({
+        render: function() {
+          return (
+            <ButtonToolbar>
+            <SplitButton title="Rating" id="split-button-basic">
+              <MenuItem eventKey='1'>1</MenuItem>
+              <MenuItem eventKey='2'>2</MenuItem>
+              <MenuItem eventKey='3'>3</MenuItem>
+              <MenuItem eventKey='4'>4</MenuItem>
+            </SplitButton>
+            </ButtonToolbar>
+          );
+        }
+      });
+      
+
+      var PHOTOS = [
+        {
+          title: "Norway",
+          caption: "Low tide at Olstinden by Douglas Stratton",
+          rating: null,
+          orderCount: 3,
+          imageUrl: "https://drscdn.500px.org/photo/81913125/m%3D2048/d6926aeb94599899fc9e76fce241ff94"
+        },
+        {
+          title: "Maui",
+          caption: "Makena Cove, Maui. Let's go to the beach!",
+          rating: null,
+          orderCount: 2,
+          imageUrl: "http://assets.fodors.com/destinations/4636/beach-makena-cove-south-shore-maui-maui-hawaii-usa_main.jpg"
+        },
+        {
+          title: "Tufa",
+          caption: "Tufa at Night by Romain Guy",
+          rating: '',
+          orderCount: 3,
+          imageUrl: "https://lh3.googleusercontent.com/-YifreVFp77c/UMoTI_wpC6I/AAAAAAAAMRw/6VACc_ubeaU/w2048-h1312/Tufa%2Bat%2BNight.jpg"
+        },
+        {
+          title: "Lost Island",
+          caption: "Lost Island, San Gregorio, by Romain Guy",
+          rating: '',
+          orderCount: 1,
+          imageUrl: "https://lh3.googleusercontent.com/-7WqXcxOUVVA/VW1ct0NIx1I/AAAAAAAAQKE/GUcb_c0UAzc/w1719-h1149-no/Lost%2BIsland.jpg"
+        },
+        {
+          title: "Winter Scene",
+          caption: "Winter is coming, somewhere",
+          rating: '',
+          orderCount: 5,
+          imageUrl: "http://www.smashingmagazine.com/images/winter-wonderland/temple.jpg"
+        }
+      ];
+
+      React.render(<AlbumInfo photos={PHOTOS}/>, document.getElementById('app-container'));
+
+      // TODO: refactor below to include photo view and rating inside app container
+      React.render(<SelectedPhoto photos={PHOTOS}/>, document.getElementById('photo-container'));
+      React.render(<RatingDropdown/>, document.getElementById('rating-dropdown'));
+
+    </script>
+
+    </div> <!-- /container wrapper for bootstrap styling to work-->
+
+  </body>
+</html>
