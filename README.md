@@ -15,7 +15,7 @@ Inspired by ["Thinking in React"](http://facebook.github.io/react/docs/thinking-
     * `AlbumInfo` (displays photo list)
         - `PhotoListHeader` (displays a heading for the album)
         - `PhotoTitle` (displays a clickable photo title)
-    - `RatingDropDown` (receives user input to rate the photo in the display) 
+    - `RatingDropdown` (receives user input to rate the photo in the display) 
     - `RatingDisplay` (displays the star value under the dropdown) <- not shown in the mock
 
 
@@ -27,7 +27,9 @@ Inspired by ["Thinking in React"](http://facebook.github.io/react/docs/thinking-
   -  `AlbumInfo` (table that holds list)
      - `PhotoListHeader` (displays a heading for the album)      
      - `PhotoTitle` (displays a clickable photo title)
-  -  `RatingDropDown` (menu with 4 options)
+  -  `RatingDropdown` (menu with 4 options)
+
+2. Build the interactive components [TODO]
 
 ### Related Projects
 
