@@ -33,8 +33,6 @@
       var ButtonToolbar = ReactBootstrap.ButtonToolbar;
       var SplitButton = ReactBootstrap.SplitButton;
       var MenuItem = ReactBootstrap.MenuItem;
-
-
       
       var PhotoTitle = React.createClass({
         render: function() {
@@ -47,41 +45,30 @@
         }
       });
 
-      var AlbumInfo = React.createClass({
-        render: function() {
-          var rows = [];
-          this.props.photos.forEach(function(photo) {
-            rows.push(<PhotoTitle photo={photo} key={photo.title} />);
-          });
+      // var AlbumInfo = React.createClass({
+      //   render: function() {
+      //     var rows = [];
+      //     this.props.photos.forEach(function(photo) {
+      //       rows.push(<PhotoTitle photo={photo} key={photo.title} />);
+      //     });
 
-          // test function for click behavior
-          // TODO bind click to selected photo
-          // var selectedTitle;
-          var alertClicked = function() {
-            // selectedTitle = photo.title;
-            alert('You clicked me');
-          };
-
-          return (
-            <div className="album-info">
-              <Table responsive bordered hover>
-                <thead>
-                  <tr><th>Photos in this Album</th></tr>
-                </thead>
-                <tbody><a onClick={alertClicked}>{rows}</a></tbody>
-              </Table></div>
-            );
-        }
-      });
+      //     return (
+      //       <div className="album-info">
+      //         <Table responsive bordered hover>
+      //           <thead>
+      //             <tr><th>Photos in this Album</th></tr>
+      //           </thead>
+      //           <tbody><a onClick={alertClicked}>{rows}</a></tbody>
+      //         </Table></div>
+      //       );
+      //   }
+      // });
 
       var SelectedPhoto = React.createClass({
         render: function() {
           return (
             <div className="selected-photo">
-              <img src={this.props.photos[0].imageUrl} />
-                <div className="caption">{this.props.photos[0].caption}
-                  <div className="count">{this.props.photos[0].orderCount} of {this.props.photos.length}</div>
-                </div>
+              <img src={this.imageUrl} />
             </div>
             );
         }
@@ -102,6 +89,58 @@
         }
       });
       
+      var AppContainer = React.createClass({
+        url: '',
+        getInitialState: function() {
+          return {
+            title: '',
+            caption: '',
+            rating: 0,
+            orderCount: 0,
+            imageUrl: 'https://drscdn.500px.org/photo/81913125/m%3D2048/d6926aeb94599899fc9e76fce241ff94'
+          };
+        },
+
+        handleChange: function(event) {
+          this.setState({
+            rating: event.target.value
+          });
+        },
+
+        handleClick: function(i) {
+          this.setState({
+            title: this.props.photos[i].title,
+            imageUrl: this.props.photos[i].imageUrl,
+            orderCount: this.props.photos[i].orderCount,
+            caption: this.props.photos[i].caption
+          });
+
+         var url = this.props.photos[i].imageUrl;
+
+          console.log(url);
+        },
+
+        render: function() {
+
+          return (
+            <div className="album-info">
+                <Table responsive bordered hover>
+                  <thead>
+                    <tr><th>Photos in this Album</th></tr>
+                  </thead>
+                    <tbody>
+                    {this.props.photos.map(function(photo, i) {
+                      return (
+                          <tr><td onClick={this.handleClick.bind(this, i)} key={i} ref="photoClicked">{photo.title}</td></tr>
+                        );
+                      }, this)}
+                    </tbody>
+              </Table>
+            </div>
+            );
+          }
+
+      });
 
       var PHOTOS = [
         {
@@ -141,11 +180,13 @@
         }
       ];
 
-      React.render(<AlbumInfo photos={PHOTOS}/>, document.getElementById('app-container'));
+      // React.render(<AlbumInfo photos={PHOTOS}/>, document.getElementById('app-container'));
 
       // TODO: refactor below to include photo view and rating inside app container
-      React.render(<SelectedPhoto photos={PHOTOS}/>, document.getElementById('photo-container'));
+      React.render(<AppContainer photos={PHOTOS}/>, document.getElementById('app-container'));
       React.render(<RatingDropdown/>, document.getElementById('rating-dropdown'));
+      React.render(<SelectedPhoto/>, document.getElementById('photo-container'));
+
 
     </script>
 
