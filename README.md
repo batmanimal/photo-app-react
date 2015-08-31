@@ -1,4 +1,4 @@
-# PhotoMVC - Angular
+# PhotoMVC - React
 ###My Super Awesome Photos
 
 Design mock (from my version in Angular; see below for link)
