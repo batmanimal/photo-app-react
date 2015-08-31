@@ -1,6 +1,5 @@
-## My Super Awesome Photos
-
-Photo album app, built using React
+# PhotoMVC - Angular
+###My Super Awesome Photos
 
 Design mock (from my version in Angular; see below for link)
 
