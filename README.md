@@ -1,6 +1,6 @@
 ## Photo Album App, built using React
 
-Design mock (taken from the completed version in Angular)
+Design mock (from my version in Angular; see below for link)
 
 ![design](http://i.imgur.com/EygN6p7l.jpg)
 
